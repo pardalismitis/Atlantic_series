@@ -1,6 +1,6 @@
 ---
-title: "ATLANTIC CAMTRAPS - GRÁFICOS"
-author: "Fernando Lima"
+title: "ATLANTIC CAMTRAPS - FIGURES/GRAPHS"
+author: "Fernando Lima, D.Sc."
 date: "9 de novembro de 2017"
 output:
   html_document: default
@@ -11,39 +11,37 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r packages}
+```{r packages, include=FALSE}
 library(here)
 library(ggplot2)
 library(forcats)
 library(RColorBrewer)
 ```
 
-## DESCRIÇÃO
+## DESCRIPTION
 
-Gráficos para o datapaper Atlantic-Camtraps.
-Adaptado e organizado a partir da primeira versão criada por Renata Muylaert.
+Scripts and information on the figures and graphs presented in the datapaper Atlantic-Camtraps.
 
-### GRUPO DE TRABALHO
+V.0 by Renata Muylaert.
 
-**pH** Fernando Lima, D.Sc.  
-**RM** Renata Muylaert, D.Sc.  
-**MR** Milton Ribeiro, D.Sc.  
+### WORKING GROUP
 
-### NOTAS (README)
-
-ADICAO DE COMENTARIOS:
-Corpo do Texto: insira suas iniciais entre `**` e depois os comentarios: e.g. `**pH**` blablabla
-Código: 
+-   Fernando Lima, D.Sc.
+-   Renata Muylaert, D.Sc.
+-   Milton Ribeiro, D.Sc.
 
 ### Data prep
-####Select species and effort data
+
+#### Select species and effort data
+
 ```{r speciesData}
 data <- read.csv(here("data", "splist_filtered_2017_04d24.csv"), sep = ",")
 ef <- read.csv(here("data", "effort.txt"), sep="\t")
 ```
 
-####Ordenando data por ordem e por FO:
-```{r ordering}
+#### Organize by order and frequency of occurrency - FO
+
+```{r organizing}
 data <- data[order(data$fo),]
 
 str(data)
@@ -53,28 +51,33 @@ unique(data$sp_id)
 head(data)
 ```
 
-###FIGURE 01 - MAP
+### FIGURE 01 - MAP
 
 Generated in ArcGis by Fernando Lima
 
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("figures","ATLANTIC_CAMTRAPS_FIG01.tif"))
+#knitr::include_graphics(here("figures","ATLANTIC_CAMTRAPS_FIG01.jpg"))
 ```
+
+![](images/ATLANTIC_CAMTRAPS_FIG01.jpg)
 **Fig. 1.** Distribution of the camera trap surveys of medium and large terrestrial mammal communities within the Atlantic Forest extent. Gray shows the Atlantic Forest extent with remaining forest patches in green (sensu Ribeiro et al. 2009). Blue dots show the geographic locations of studies.
 
-###FIGURA 02 - SUNBURST
+### FIGURA 02 - SUNBURST
 
 Esta figura foi feita no Excel, utilizando a função `sunburst`
+
 ```{r, echo=FALSE, out.width="700px"}
-knitr::include_graphics(here("figures","ATLANTIC_CAMTRAPS_FIG02.png"))
+#knitr::include_graphics(here("figures","ATLANTIC_CAMTRAPS_FIG02.png"))
 ```
-  
+
+![](images/ATLANTIC_CAMTRAPS_FIG02.png)
+
 **Fig. 2.** Taxonomic information levels of medium and large terrestrial mammal species recorded in camera trap surveys within the Atlantic Forest. Only species considered well detected by camera traps are listed. From the 83 species reported in the database, 8 are not listed because the identification is at genera level. Another 28 species are not listed because they were considered opportunistic records of species not usually detected by camera traps (primates, bats, small rodents, and small marsupials).
 
-###FIGURA 03 - FREQUENCIA DE OCORRENCIA
+### FIGURA 03 - FREQUENCIA DE OCORRENCIA
 
-**RM** Demanda: Casar as cores com o sunburst!  
-**pH**  Eu mudei a paleta de cores. Inseri os codigos RGB para usar igual no Excel.  
+**RM** Demanda: Casar as cores com o sunburst!\
+**pH** Eu mudei a paleta de cores. Inseri os codigos RGB para usar igual no Excel.
 
 ```{r generate_figures, fig.show = "hide"}
 fct_rev(fct_infreq(factor(data$species.1)))
@@ -127,14 +130,15 @@ cores<-c("indianred1" , # pH # artiodactyla mudar para indianred #cd5c5c rgb(205
 ```{r, echo=FALSE, out.width="700px"}
 knitr::include_graphics(here("figures","ATLANTIC_CAMTRAPS_FIG03.png"))
 ```
-  
+
 **Fig. 3.** Distribution of frequencies of occurrence of the main species evaluated in ATLANTIC-CAMTRAPS, and their status in the 2017 IUCN Red list of threatened species. LC = least concern, NT = near threatened, VU = vulnerable, EN = endangered, CR = critically endangered, DD = data deficient, and IN = invasive species (not an IUCN category).
 
 ### FIGURA 04 - MAPA
+
 O mapa foi feito no ArcMap
+
 ```{r, echo=FALSE, out.width="700px"}
 knitr::include_graphics(here("figures","ATLANTIC_CAMTRAPS_FIG04.jpg"))
 ```
-  
-**Fig. 4.** Distribution of taxonomic richness and sampling effort across Atlantic Forest sites where camera traps were used for sampling of medium and large terrestrial mammal species. Opportunistic records (see the text) were removed from this analysis.
 
+**Fig. 4.** Distribution of taxonomic richness and sampling effort across Atlantic Forest sites where camera traps were used for sampling of medium and large terrestrial mammal species. Opportunistic records (see the text) were removed from this analysis.
